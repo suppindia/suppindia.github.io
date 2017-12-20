@@ -1,57 +1,89 @@
 <html>
 <body>
 
-<h2>order:</h2>
+<div class="container-fluid upload_section ">
+		<br>
+		<h1>Upload Files to 3D Print</h1><hr style="width:40%">
+		<br>
+		<h5>Kindly allow us upto 3 business hours to get back with a Quote.<br>
+		<!-- <h4>Alternatively drop a mail to print@3Ding.in with your requirements</h4> -->
+		<strong>If multiple files, please zip and upload as a single file.</strong></h5>
+		<br><br>
 
-<form method="post" name="contact_form"
-action="contact-form-handler.php">
-    Your Nme:
-    <input type="text" name="name">
-    Email Address:
-    <input type="text" name="email">
-    Message:
-    <textarea name="message"></textarea>
-    <input type="submit" value="Submit">
-</form>
-<script language="JavaScript">
-var frmvalidator  = new Validator("contactform");
-frmvalidator.addValidation("name","req","Please provide your name");
-frmvalidator.addValidation("email","req","Please provide your email");
-frmvalidator.addValidation("email","email",
-  "Please enter a valid email address");
-</script>
+		<form class="form-horizontal dropzone" id="mailForm" action="/services/success" enctype="multipart/form-data" method="post">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-3 upload_text">
+				<input name="files[]" id="imgupload" style="display:none" required="" type="file" multiple="">
+				<img width="100%" class="image_hover" id="upload_img" src="img/upload_cloud.png">
+				<h4>Upload CAD Files</h4>
+			</div>
+			<div class="col-sm-2">
+				<div class="filename"></div>
+			</div>
+			<div class="col-sm-3">
 
-<?php
-$errors = '';
-$myemail = 'SUPPINDIA13@GMAIL.COM';//<-----Put Your email address here.
-if(empty($_POST['name'])  ||
-   empty($_POST['email']) ||
-   empty($_POST['message']))
-{
-    $errors .= "\n Error: all fields are required";
-}
-$name = $_POST['name'];
-$email_address = $_POST['email'];
-$message = $_POST['message'];
-if (!preg_match(
-"/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i",
-$email_address))
-{
-    $errors .= "\n Error: Invalid email address";
-}
+				<div class="form-group">
+					<div class="col-sm-12">
+  						<input name="name" class="form-control" id="name" required="" type="text" placeholder="Name">
+					</div>
+				</div>
+			  	<div class="form-group">
+		    		<div class="col-sm-12">
+		      			<input name="email" class="form-control" id="email" required="" type="text" placeholder="Email id">
+		    		</div>
+			  	</div>
+			  	<div class="form-group">
+		    		<div class="col-sm-12">
+		      			<input name="phone" class="form-control" id="phone" required="" type="text" placeholder="Mobile No">
+		    		</div>
+			  	</div>
+			  	<div class="form-group container-fluid">
+		    		<div class="col-sm-12">
+		      			<input name="city" class="form-control" id="placepicker" required="" type="text" placeholder="City" autocomplete="off">
+		    		</div>
+			  	</div>
+			  	<div class="form-group">
+			  	  <div class="col-sm-12">
+                     <div class="col-sm-4 container-fluid">
+                    <select name="technology" class="form-control" id="material" onchange="material2()">
+                    <option disabled="" value="Technology" selected="">Technology</option>
+                     <option value="FDM">FDM</option>
+                     <option value="SLA">SLA</option>
+                     <option value="SLS">SLS</option>
+                     <option value="Help me choose">Help me choose</option>
+					</select>
+                     </div>
+                    <div class="col-sm-4">
+    				<select name="material" class="form-control" id="materials">
+    					<option disabled="" value="Materials" selected="">Material</option>
+                     <option value="ABS">ABS</option>
+                     <option value="PLA">PLA</option>
+                     <option value="Help me choose">Help me choose</option>
+					</select>
+                     </div>
+	            <div class="col-sm-4 container-fluid">
+    				<select name="quality" class="form-control" id="quality">
+    					<option disabled="" value="resolution" selected=""> Resolution</option>
+                     <option value="100 micron">100 Microns (high)</option>
+                     <option value="200 micron">200 Microns (Regular)</option>
+                     <option value="300 micron">300 Microns (low)</option>
+                     <option value="Help me choose">Help me choose</option>
+					</select>
+                     </div>
+               </div>
+	          </div>
+			  	<div class="form-group">
+	    			<div class="col-sm-12">
+	      				<textarea name="colour" class="form-control" id="color" placeholder="Comments Please specify material, Color or any other info required" rows="5"></textarea>
+	    			</div>
+	  			</div>
+	  			<div class="form-group text-center">
+	    			<input name="submit" class="button_red" id="sub_button" type="submit" value="Submit">
+	  			</div>
 
-if( empty($errors))
-{
-$to = $myemail;
-$email_subject = "Contact form submission: $name";
-$email_body = "You have received a new message. ".
-" Here are the details:\n Name: $name \n ".
-"Email: $email_address\n Message \n $message";
-$headers = "From: $myemail\n";
-$headers .= "Reply-To: $email_address";
-mail($to,$email_subject,$email_body,$headers);
-//redirect to the 'thank you' page
-header('Location: contact-form-thank-you.html');
-}
-?></body>
+			</div>
+			<div class="col-sm-2"></div>
+		</form>
+
+	</div></body>
 </html>
